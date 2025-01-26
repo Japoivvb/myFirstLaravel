@@ -1,6 +1,10 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Models\Job;
+
+
 
 Route::get('/', function () {
     return view('home',  ['greeting' => 'Hello']); // pass data to view getting from $greeting
@@ -12,47 +16,14 @@ Route::get('/about', function () {
 
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => [
-            [
-                'id' => 1,
-                'name' => 'John Doe',
-                'email' => 'john@gmail.com'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Lucy Lee',
-                'email' => 'lucy@gmail.com'
-            ],
-            [
-                'id' => 3,
-                'name' => 'Ben Tex',
-                'email' => 'ben@gmail.com'
-            ]
-        ]
+        'jobs' => Job::all()
     ]); // pass data to view getting from $greeting
 })->name('jobs');
 
 Route::get('/jobs/{id}', function ($id) {
-    $jobs = [
-        [
-            'id' => 1,
-            'name' => 'John Doe',
-            'email' => 'john@gmail.com'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Lucy Lee',
-            'email' => 'lucy@gmail.com'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Ben Tex',
-            'email' => 'ben@gmail.com'
-        ]
-    ];
-    
-    $job = collect($jobs)->firstWhere('id', $id);
-    // dd($job);
+    //$jobs = Job::all();    
+    //$job = collect($jobs)->firstWhere('id', $id);
+    $job = Job::find($id);
     return view('job', ['job' => $job]);
 });
 
