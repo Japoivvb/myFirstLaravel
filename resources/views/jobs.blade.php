@@ -7,6 +7,7 @@
     <a href="/jobs/{{ $job['id'] }}" class="text-blue-500 hover:underline">
         <li>{{ $job['name'] }}</li>
         <p>{{ $job['email'] }}</p>
+        <hr>
         {{-- <li>{{$job->name }}</li> --}}
         {{-- <p>{{ $job->email }}</p> --}}
     </a>        
