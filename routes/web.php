@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\Employer;
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
 
@@ -15,8 +15,11 @@ Route::get('/about', function () {
 });
 
 Route::get('/jobs', function () {
+
+    $jobs = Job::with('employer')->get();// fix problem N+1 query with relationship
+
     return view('jobs', [
-        'jobs' => Job::all()
+        'jobs' => $jobs
     ]); // pass data to view getting from $greeting
 })->name('jobs');
 
