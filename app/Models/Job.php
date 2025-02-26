@@ -12,6 +12,8 @@ class Job extends Model {
     protected $table = 'job_listings';// to link model with table
     protected $fillable = ['name','email','title','salary'];// to list attributes allowed to be insert/update
 
-    
+    public function employer(){ //singular 1 to 1
+        return $this->belongsTo(Employer::class); // 1 job belongs to 1 employer
+    }
     
 }
