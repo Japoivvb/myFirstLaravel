@@ -16,7 +16,8 @@ Route::get('/about', function () {
 
 Route::get('/jobs', function () {
 
-    $jobs = Job::with('employer')->get();// fix problem N+1 query with relationship
+    // $jobs = Job::with('employer')->get();// fix problem N+1 query with relationship
+    $jobs = Job::with('employer')->paginate(3);// to do pagination
 
     return view('jobs', [
         'jobs' => $jobs

@@ -14,5 +14,9 @@
                 {{-- <p>{{ $job->email }}</p> --}}
             </a>
         @endforeach
+        <div>
+            {{-- to include links for pagination  --}}
+            {{$jobs->links()}}
+        </div>
     </div>
 </x-layout>
