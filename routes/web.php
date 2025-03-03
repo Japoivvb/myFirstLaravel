@@ -3,8 +3,7 @@
 use App\Models\Employer;
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
-
-
+use Symfony\Contracts\Service\Attribute\Required;
 
 Route::get('/', function () {
     return view('home',  ['greeting' => 'Hello']); // pass data to view getting from $greeting
@@ -28,7 +27,15 @@ Route::get('jobs/create' , function() {
     return view('jobs.create');
 });
 Route::post('jobs' , function() {
-    // dd("hello from post");
+    // validate data
+    request()->validate([
+        'username' => ['required','min:3'] ,
+        'usermail' => ['required'],
+        'title' => ['required'],
+        'salary' => ['required']
+    ]);// if any error return to form with $errors informed    
+
+    // insert new job
     Job::create([
         'name' => request('username'),
         'email' => request('usermail'),
