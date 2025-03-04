@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout><x-layout>
     <x-slot:title>
         JOBS
     </x-slot:title>
@@ -24,3 +24,4 @@
         </div>
     </div>
 </x-layout>
+</x-app-layout>
