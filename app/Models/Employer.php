@@ -13,4 +13,7 @@ class Employer extends Model
     public function jobs(){ // plural 1 to n
         return $this->hasMany(Job::class); // 1 employer has n jobs
     }
+    public function user(){ // singular 1 to 1
+        return $this->belongsTo(User::class); // 1 employer belongs to 1 user
+    }
 }

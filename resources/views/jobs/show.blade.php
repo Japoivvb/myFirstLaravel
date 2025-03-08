@@ -9,9 +9,12 @@
             <p><strong>Salary:</strong> {{ $job->salary }}</p>
 
             {{-- to edit the job  --}}
+            {{-- authorize, only show button if it can edit based on AppServiceProvider.boot --}}
+            @can('edit-job', $job)
             <p class="mt-6 mb-6">
                 <x-button href="/jobs/{{ $job->id }}/edit">Edit Job</x-button>
             </p>
+            @endcan
 
             {{-- to redirect back --}}
             <p class="mt-6">

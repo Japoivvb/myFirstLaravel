@@ -27,20 +27,15 @@ Route::middleware('auth')->group(function () {
     Route::view('/contact', 'contact');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-});
-
-
 Route::controller(JobController::class)->group(function(){
-    // Route::get('/jobs', 'index')->name('jobs');
+    Route::get('/jobs', 'index')->name('jobs');
     Route::get('jobs/create',  'create');
     Route::post('jobs',  'store');
     Route::get('/jobs/{job}',  'show');
-    Route::get('/jobs/{job}/edit',  'edit');
+    Route::get('/jobs/{job}/edit',  'edit')->middleware('can:edit-job,job');
     Route::patch('/jobs/{job}',  'update');
     Route::delete('/jobs/{job}',  'destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified']);// access only in case siggned in
 
 
 require __DIR__.'/auth.php';
