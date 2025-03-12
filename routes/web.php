@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobController;
+use App\Mail\JobPosted;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -37,5 +39,9 @@ Route::controller(JobController::class)->group(function(){
     Route::delete('/jobs/{job}',  'destroy');
 })->middleware(['auth', 'verified']);// access only in case siggned in
 
-
+Route::get('testMail', function(){
+    //return new JobPosted(); to see content
+    Mail::to('jose.portugal.ortuno@gmail.com')->send(new JobPosted());
+    return 'Sent';
+});
 require __DIR__.'/auth.php';
