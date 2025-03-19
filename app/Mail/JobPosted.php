@@ -19,7 +19,7 @@ class JobPosted extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Job $job)
+    public function __construct(public ?Job $job =  null)
     {
         //
     }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobController;
+use App\Jobs\TranslateJob;
 use App\Mail\JobPosted;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,5 +44,19 @@ Route::get('testMail', function(){
     //return new JobPosted(); to see content
     Mail::to('jose.portugal.ortuno@gmail.com')->send(new JobPosted());
     return 'Sent';
+});
+
+Route::get('testQueue', function(){
+    // send message to a log using a queue
+    dispatch(function(){
+        logger('hello from the queue');
+    });
+    return 'Queue done';
+});
+
+Route::get('testJob', function(){
+    // send message to a log using a job
+    TranslateJob::dispatch();
+    return 'Job done';
 });
 require __DIR__.'/auth.php';
