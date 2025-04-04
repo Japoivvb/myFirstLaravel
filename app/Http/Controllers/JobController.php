@@ -28,6 +28,10 @@ class JobController extends Controller
     }
     public function store()
     {
+        // dump and die
+        //dd(request());
+        // dump and continue
+        //dump(request());
         // validate data
         request()->validate([
             'username' => ['required', 'min:3'],
